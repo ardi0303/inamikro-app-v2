@@ -67,7 +67,8 @@ class AppBarWidget extends StatelessWidget {
                       if (showBack)
                         GestureDetector(
                           onTap: () => {
-                            Navigator.pop(context),
+                            if (Navigator.canPop(context))
+                              {Navigator.pop(context)},
                             if (onSearchChanged != null) {onSearchChanged!('')},
                             if (controller != null) {controller!.clear()}
                           },

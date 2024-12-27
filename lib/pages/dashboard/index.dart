@@ -5,6 +5,9 @@ import 'package:inamikro_app_v2/pages/dashboard/operasional.dart';
 import 'package:inamikro_app_v2/pages/dashboard/slider.dart';
 import 'package:inamikro_app_v2/pages/dashboard/transaksi.dart';
 import 'package:inamikro_app_v2/pages/kasir_cepat/index.dart';
+import 'package:inamikro_app_v2/pages/profile/index.dart';
+import 'package:inamikro_app_v2/pages/riwayat/index.dart';
+import 'package:inamikro_app_v2/pages/tokoku/index.dart';
 import 'package:inamikro_app_v2/widget/app_bar.dart';
 import 'package:inamikro_app_v2/widget/bottom_nav.dart';
 
@@ -12,6 +15,7 @@ class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _DashboardState createState() => _DashboardState();
 }
 
@@ -20,10 +24,10 @@ class _DashboardState extends State<Dashboard> {
 
   final List<Widget> _pages = [
     const DashboardContent(),
-    const LikesContent(),
+    const Tokoku(),
     const KasirCepat(),
-    const ProfileContent(),
-    const ProfileContent2(),
+    const RiwayatTransaksi(),
+    const Profile(),
   ];
 
   @override
@@ -86,7 +90,7 @@ class LikesContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Likes Page'));
+    return const Center(child: Text('Likes Page'));
   }
 }
 
@@ -95,7 +99,7 @@ class KasirCepatContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Kasir Cepat Page'));
+    return const Center(child: Text('Kasir Cepat Page'));
   }
 }
 
@@ -104,15 +108,6 @@ class ProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Profile Page 1'));
-  }
-}
-
-class ProfileContent2 extends StatelessWidget {
-  const ProfileContent2({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Profile Page 2'));
+    return const Center(child: Text('Profile Page 1'));
   }
 }

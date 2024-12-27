@@ -20,6 +20,36 @@ class KasirPintarProvider extends ChangeNotifier {
   String get invoiceNumber => _invoiceNumber;
   String get date => _date;
   String get time => _time;
+  final String _customerName = 'Name';
+  String get customerName => _customerName;
+
+  final List<Map<String, dynamic>> _transactions =
+      []; // To store transaction history
+
+  List<Map<String, dynamic>> get transactions => _transactions;
+
+  void saveTransaction() {
+    if (_selectedItems.isEmpty) return; // Don't save empty transactions
+
+    _transactions.add({
+      'invoiceNumber': _invoiceNumber,
+      'date': _date,
+      'time': _time,
+      'customerName': _customerName, // Include static customer name
+      'items': _selectedItems
+          .map((item) => {
+                'name': item.namaBarang,
+                'quantity': item.quantity,
+                'price': item.hargaBarang,
+              })
+          .toList(),
+      'totalPrice': _totalPrice,
+      'umkmTax': umkmTax,
+      'finalPrice': totalPriceWithTax,
+    });
+
+    resetCart(); // Reset cart after saving
+  }
 
   static String _generateInvoiceNumber() {
     final random = Random();
@@ -78,8 +108,11 @@ class KasirPintarProvider extends ChangeNotifier {
   }
 
   void resetCart() {
-    _selectedItems.clear(); 
-    _totalPrice = 0; 
-    notifyListeners(); 
+    for (var item in _selectedItems) {
+      item.quantity = 0;
+    }
+    _selectedItems.clear();
+    _totalPrice = 0;
+    notifyListeners();
   }
 }

@@ -19,8 +19,8 @@ class BeritaWidget extends StatelessWidget {
 
                 return Container(
                   decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/berita.png'),
+                    image: DecorationImage(
+                      image: AssetImage(berita.thumbnail),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(20.0),
@@ -100,30 +100,3 @@ class BeritaWidget extends StatelessWidget {
     );
   }
 }
-
-// ...beritaData.map(
-//   (berita) => Padding(
-//     padding: const EdgeInsets.symmetric(vertical: 8.0),
-//     child: Row(
-//       children: [
-//         ClipRRect(
-//           borderRadius:
-//               BorderRadius.circular(8.0), // Set border radius
-//           child: Image.asset(
-//             berita.thumbnail,
-//             width: 65,
-//             height: 65,
-//             fit: BoxFit.cover,
-//           ),
-//         ),
-//         const SizedBox(width: 10),
-//         Expanded(
-//           child: Text(
-//             berita.title,
-//             style: const TextStyle(fontSize: 14.0),
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// ),

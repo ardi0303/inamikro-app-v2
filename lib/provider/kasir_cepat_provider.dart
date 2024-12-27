@@ -19,13 +19,44 @@ class KasirCepatProvider extends ChangeNotifier {
   String get invoiceNumber => _invoiceNumber;
   String get date => _date;
   String get time => _time;
+  final String _customerName = 'Name';
+  String get customerName => _customerName;
+
+  final List<Map<String, dynamic>> _transactions = [];
+
+  List<Map<String, dynamic>> get transactions => _transactions;
+
+  void saveTransaction() {
+    final transaction = {
+      'invoiceNumber': _invoiceNumber,
+      'date': _date,
+      'time': _time,
+      'customerName': _customerName,
+      'items': _items
+          .map((item) => {
+                'name': item.namaBarang,
+                'quantity': item.quantity,
+                'price': item.hargaBarang,
+                'satuan': item.satuan,
+              })
+          .toList(),
+      'totalPrice': _totalPrice,
+      'umkmTax': umkmTax,
+      'finalPrice': _totalPrice + umkmTax,
+    };
+
+    _transactions.add(transaction);
+    resetCart();
+    notifyListeners();
+  }
 
   // Private helper methods for generating values
   static String _generateInvoiceNumber() {
     final random = Random();
     const length = 8;
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 
   static String _getCurrentDate() {

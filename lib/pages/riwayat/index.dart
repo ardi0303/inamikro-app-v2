@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:inamikro_app_v2/app_palette.dart';
-import 'package:inamikro_app_v2/pages/kasir_cepat/input_barang.dart';
-import 'package:inamikro_app_v2/provider/kasir_cepat_provider.dart';
+import 'package:inamikro_app_v2/pages/riwayat/history_transaksi.dart';
 import 'package:inamikro_app_v2/widget/app_bar.dart';
-import 'package:inamikro_app_v2/widget/total_price.dart';
 
-class KasirCepat extends StatelessWidget {
-  const KasirCepat({super.key});
+class RiwayatTransaksi extends StatelessWidget {
+  const RiwayatTransaksi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +15,7 @@ class KasirCepat extends StatelessWidget {
           children: <Widget>[
             const SafeArea(
               child: AppBarWidget(
-                title: "Kasir Cepat",
+                title: "Riwayat",
                 colorFilter: ColorFilter.mode(AppPalette.red, BlendMode.srcIn),
                 showSearch: false,
                 titlePosition: 'beside',
@@ -25,13 +23,18 @@ class KasirCepat extends StatelessWidget {
                 showBack: false,
               ),
             ),
-            InputBarangWidget(),
-            TotalAndPayWidget<KasirCepatProvider>(
-              totalValueExtractor: (cart) => cart.totalPrice.toString(),
-              onPayPressed: () {
-                Navigator.pushNamed(context, '/kasir-cepat/cart');
-              },
-            ),
+            Container(
+              height: MediaQuery.of(context).size.height - 250,
+              decoration: const BoxDecoration(
+                color: AppPalette.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40.0),
+                  topRight: Radius.circular(40.0),
+                ),
+              ),
+              padding: const EdgeInsets.all(40),
+              child: const HistoryTransaksiWidget(),
+            )
           ],
         ),
       ),

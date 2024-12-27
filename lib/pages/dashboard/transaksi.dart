@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inamikro_app_v2/app_palette.dart';
+import 'package:inamikro_app_v2/datas/user_data.dart';
+import 'package:intl/intl.dart';
 
 class TransaksiWidget extends StatelessWidget {
   const TransaksiWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final user = userData;
+
+    final currencyFormatter = NumberFormat.currency(
+      locale: 'id',
+      symbol: 'Rp',
+      decimalDigits: 0,
+    );
+
     return Container(
       padding: const EdgeInsets.only(
         top: 40.0,
@@ -42,21 +52,21 @@ class TransaksiWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           SvgPicture.asset(
-                            'assets/icons/chart_transaction.svg',
+                            'assets/icons/chart_penjualan.svg',
                             width: 120,
                           ),
                           const SizedBox(
                             height: 20,
                           ),
-                          const Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Penjualan\nhari ini',
                               ),
                               Text(
-                                'Rp 750.000',
-                                style: TextStyle(
+                                currencyFormatter.format(user[0].penjualan),
+                                style: const TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -88,18 +98,19 @@ class TransaksiWidget extends StatelessWidget {
                                 SvgPicture.asset(
                                   'assets/icons/up_arrow.svg',
                                 ),
-                                const Column(
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Keuntungan',
                                       style: TextStyle(color: AppPalette.grey),
                                     ),
                                     Text(
-                                      'Rp 2.750.000',
-                                      style: TextStyle(
+                                      currencyFormatter
+                                          .format(user[0].keuntungan),
+                                      style: const TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.bold,
                                           color: AppPalette.grey),
@@ -118,16 +129,16 @@ class TransaksiWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           padding: const EdgeInsets.all(20),
-                          child: const Column(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Pengeluaran',
                                 style: TextStyle(color: AppPalette.red),
                               ),
                               Text(
-                                'Rp 2.450.000',
-                                style: TextStyle(
+                                currencyFormatter.format(user[0].pengeluaran),
+                                style: const TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                     color: AppPalette.red),
@@ -142,31 +153,6 @@ class TransaksiWidget extends StatelessWidget {
               ),
             ),
           ),
-          // InkWell(
-          //   onTap: () {
-          //     Navigator.pushNamed(context, '/kasir-pintar');
-          //   },
-          //   child: const Text(
-          //     'Kasir Pintar',
-          //     style: TextStyle(
-          //       fontSize: 24.0,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // ),
-          // const SizedBox(height: 16.0),
-          // InkWell(
-          //   onTap: () {
-          //     Navigator.pushNamed(context, '/kasir-cepat');
-          //   },
-          //   child: const Text(
-          //     'Kasir Cepat',
-          //     style: TextStyle(
-          //       fontSize: 24.0,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

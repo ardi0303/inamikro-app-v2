@@ -35,9 +35,9 @@ class InvoiceWidget extends StatelessWidget {
                     boldValue: true,
                   ),
                   const SizedBox(height: 20),
-                  const InfoRow(
+                  InfoRow(
                     label: 'Pelanggan',
-                    value: 'Name',
+                    value: cart.customerName,
                     boldValue: true,
                   ),
                 ],
@@ -146,6 +146,7 @@ class InvoiceWidget extends StatelessWidget {
                                 totalPrice: cart.totalPrice,
                                 umkmTax: cart.umkmTax,
                               );
+                              // ignore: avoid_print
                               print('Invoice saved at $filePath');
                               // Share the PDF file
                               Share.share(
@@ -166,6 +167,7 @@ class InvoiceWidget extends StatelessWidget {
                         textColor: Colors.white,
                         isBold: true,
                         onPressed: () {
+                          cart.saveTransaction();
                           Navigator.pushNamed(context, '/');
                         },
                       ),
