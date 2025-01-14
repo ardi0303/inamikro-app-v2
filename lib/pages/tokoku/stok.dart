@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inamikro_app_v2/datas/barang_data.dart';
 
 class StokWidget extends StatelessWidget {
   const StokWidget({super.key});
@@ -127,13 +128,13 @@ class StokWidget extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Kelola Stok"),
+                  const Text("Kelola Stok"),
                   Text(
-                    "123 Produk",
-                    style: TextStyle(
+                    "${barangData.length} Produk",
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),

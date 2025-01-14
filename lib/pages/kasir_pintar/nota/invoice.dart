@@ -59,7 +59,7 @@ class InvoiceWidget extends StatelessWidget {
 
               const InfoRow(
                 label: 'Metode pembayaran',
-                value: 'Metode',
+                value: 'Tunai',
                 boldValue: true,
               ),
               const SizedBox(height: 40),

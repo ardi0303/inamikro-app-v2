@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
 
 Future<String> generateInvoicePdf({
   required String invoiceNumber,
@@ -29,7 +28,6 @@ Future<String> generateInvoicePdf({
           pw.Text('Pelanggan: $customerName',
               style: const pw.TextStyle(fontSize: 16)),
           pw.SizedBox(height: 20),
-          // ignore: deprecated_member_use
           pw.Table.fromTextArray(
             headers: ['Item', 'Quantity', 'Price'],
             data: items
@@ -58,15 +56,20 @@ Future<String> generateInvoicePdf({
     ),
   );
 
-  final directory = await getExternalStorageDirectory();
-  final filePath = '${directory?.path}/invoice_$invoiceNumber.pdf';
+  // Path ke folder Download
+  final directory = Directory('/storage/emulated/0/Download');
+  if (!await directory.exists()) {
+    await directory.create(recursive: true); // Buat folder jika belum ada
+  }
+  final filePath = '${directory.path}/invoice_$invoiceNumber.pdf';
   final file = File(filePath);
 
   try {
     await file.writeAsBytes(await pdf.save());
+    print("PDF berhasil disimpan di $filePath");
   } catch (e) {
-    // ignore: avoid_print
     print("Error saving PDF: $e");
   }
+
   return filePath;
 }
